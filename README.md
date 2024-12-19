@@ -27,11 +27,4 @@ fluid-simulation
 
 ## Instruções de Compilação
 
-1. Certifique-se de que a biblioteca SDL2 está instalada.
-2. Navegue até o diretório do projeto.
-3. Execute `cmake .` para configurar o projeto.
-4. Execute `make` para compilar o projeto.
-
-## Uso
-
-Após a compilação, execute o programa gerado. O fluído irá acompanhar o movimento do cursor do mouse na janela da aplicação.
+Em breve...
