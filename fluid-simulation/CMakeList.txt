@@ -1,0 +1,55 @@
+cmake_minimum_required(VERSION 3.10)
+project(FluidSimulation)
+
+# Configurações do compilador
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_BUILD_TYPE Debug)
+
+# Configurar SDL2
+set(SDL2_DIR "C:/SDL2/cmake") # Ajuste este caminho se necessário
+find_package(SDL2 REQUIRED)
+if(NOT SDL2_FOUND)
+    message(FATAL_ERROR "SDL2 não encontrado. Por favor, instale o SDL2 ou configure o caminho correto.")
+endif()
+
+# Incluir diretórios
+include_directories(${SDL2_INCLUDE_DIRS})
+include_directories(${PROJECT_SOURCE_DIR}/src)
+
+# Verificar arquivos fonte
+set(SOURCES
+    src/main.cpp
+    src/fluid/fluid.cpp
+    src/fluid/particle.cpp
+    src/renderer/renderer.cpp
+    src/utils/vector.cpp
+)
+
+foreach(SOURCE ${SOURCES})
+    if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${SOURCE})
+        message(FATAL_ERROR "Arquivo fonte não encontrado: ${SOURCE}")
+    endif()
+endforeach()
+
+# Adicionar executável
+add_executable(fluid_simulation ${SOURCES})
+
+# Configurar linking
+target_link_libraries(fluid_simulation PRIVATE ${SDL2_LIBRARIES})
+
+# Configurações de debug
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions(fluid_simulation PRIVATE DEBUG)
+    if(MSVC)
+        target_compile_options(fluid_simulation PRIVATE /W4)
+    else()
+        target_compile_options(fluid_simulation PRIVATE -Wall -Wextra)
+    endif()
+endif()
+
+# Copiar DLLs do SDL2 (Windows)
+if(WIN32)
+    file(GLOB SDL2_DLLS "${SDL2_DIR}/bin/*.dll")
+    file(COPY ${SDL2_DLLS} DESTINATION ${CMAKE_BINARY_DIR})
+endif()

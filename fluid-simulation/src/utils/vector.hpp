@@ -1,6 +1,8 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
+#include <cmath>
+
 class Vector2 {
 public:
     float x;
@@ -21,12 +23,16 @@ public:
     }
 
     float length() const {
-        return sqrt(x * x + y * y);
+        return std::sqrt(x * x + y * y);
     }
 
     Vector2 normalized() const {
         float len = length();
         return len > 0 ? Vector2(x / len, y / len) : Vector2(0, 0);
+    }
+
+    float magnitude() const {
+        return std::sqrt(x * x + y * y);
     }
 };
 

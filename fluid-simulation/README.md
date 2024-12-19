@@ -4,12 +4,25 @@ Este projeto implementa uma simulação de fluído que acompanha o cursor do mou
 
 ## Estrutura do Projeto
 
-- `src/main.cpp`: Ponto de entrada da aplicação.
-- `src/fluid/`: Contém a implementação da simulação do fluído e das partículas.
-- `src/renderer/`: Responsável pela renderização do fluído e das partículas.
-- `src/utils/`: Funções utilitárias para manipulação de vetores.
-- `include/SDL2`: Arquivos de cabeçalho da biblioteca SDL2.
-- `lib/`: Bibliotecas externas utilizadas no projeto.
+fluid-simulation
+├── src
+│   ├── main.cpp
+│   ├── fluid
+│   │   ├── fluid.cpp
+│   │   ├── fluid.hpp
+│   │   ├── particle.cpp
+│   │   └── particle.hpp
+│   ├── renderer
+│   │   ├── renderer.cpp
+│   │   └── renderer.hpp
+│   └── utils
+│       ├── vector.cpp
+│       └── vector.hpp
+├── include
+│   └── SDL2
+├── lib
+├── CMakeLists.txt
+└── README.md
 - `CMakeLists.txt`: Script de configuração do CMake.
 
 ## Instruções de Compilação
